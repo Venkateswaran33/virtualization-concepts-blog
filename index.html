@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A student-friendly guide to hardware and software virtualization, servers, networks, hypervisors, containers, and costs.">
+  <title>Virtualization Concepts | A Practical Guide</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Virtualization Concepts home"><span class="brand-mark">V</span> Virtualization<span class="brand-light">Lab</span></a>
+    <nav aria-label="Main navigation">
+      <a href="#types">Types</a><a href="#hypervisors">Hypervisors</a><a href="#containers">Containers</a><a href="#cost">Cost</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-content">
+        <p class="eyebrow">COMPUTING • EXPLAINED SIMPLY</p>
+        <h1>One machine.<br><span>Many possibilities.</span></h1>
+        <p class="hero-copy">A practical guide to virtualization—how it works, where it is used, and what it costs.</p>
+        <a class="primary-button" href="#types">Explore the concepts <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="hero-art" aria-label="Illustration of virtual machines running on one physical server" role="img">
+        <div class="server"><div class="server-top"></div><div class="server-slot"><i></i><i></i><i></i></div><div class="server-slot"><i></i><i></i><i></i></div><div class="server-slot"><i></i><i></i><i></i></div></div>
+        <div class="vm vm-one"><b>VM 01</b><span>Linux</span></div>
+        <div class="vm vm-two"><b>VM 02</b><span>Windows</span></div>
+        <div class="vm vm-three"><b>VM 03</b><span>Testing</span></div>
+        <div class="connection c1"></div><div class="connection c2"></div><div class="connection c3"></div>
+        <p class="art-caption">One physical host · Multiple isolated environments</p>
+      </div>
+    </section>
+
+    <section class="intro section-wrap">
+      <p class="eyebrow dark-eyebrow">THE BIG IDEA</p>
+      <h2>What is virtualization?</h2>
+      <p class="lead">Virtualization uses software to create virtual versions of computing resources—such as computers, operating systems, storage, or networks. Instead of dedicating one physical machine to one workload, resources can be shared among multiple isolated environments.</p>
+      <div class="stats">
+        <article><span class="stat-icon">01</span><h3>Abstract</h3><p>Separate the service or operating system from the underlying hardware.</p></article>
+        <article><span class="stat-icon">02</span><h3>Share</h3><p>Use CPU, memory, storage, and network capacity more efficiently.</p></article>
+        <article><span class="stat-icon">03</span><h3>Isolate</h3><p>Keep workloads separated so they can be managed independently.</p></article>
+      </div>
+    </section>
+
+    <section id="types" class="tinted-section">
+      <div class="section-wrap">
+        <p class="eyebrow dark-eyebrow">01 / FOUNDATIONS</p><h2>Hardware vs. software virtualization</h2>
+        <p class="section-subtitle">These ideas are related, but they describe different layers of the system.</p>
+        <div class="two-cards">
+          <article class="concept-card">
+            <div class="card-symbol hardware-symbol">▦</div><h3>Hardware virtualization</h3>
+            <p>A hypervisor presents virtual hardware to guest operating systems. Each virtual machine can run its own OS and applications.</p>
+            <ul><li>Commonly used for server consolidation</li><li>Supports different guest operating systems</li><li>Usually provides a strong VM boundary</li></ul>
+            <p class="example"><b>Example:</b> Three virtual servers running on one physical host.</p>
+          </article>
+          <article class="concept-card">
+            <div class="card-symbol software-symbol">&lt;/&gt;</div><h3>Software virtualization</h3>
+            <p>Software creates an isolated or emulated environment for an application or system component, without always virtualizing an entire machine.</p>
+            <ul><li>Can provide application compatibility</li><li>May virtualize runtime or application layers</li><li>Scope depends on the technology</li></ul>
+            <p class="example"><b>Example:</b> An application running in a managed runtime or compatibility layer.</p>
+          </article>
+        </div>
+        <p class="note"><b>Remember:</b> “Software virtualization” is a broad term. Virtual machines are also created and managed by software, while containers and application virtualization work at different layers.</p>
+      </div>
+    </section>
+
+    <section class="section-wrap">
+      <p class="eyebrow dark-eyebrow">02 / INFRASTRUCTURE</p><h2>Server and network virtualization</h2>
+      <div class="feature-grid">
+        <article class="feature-card"><div class="feature-icon">▤</div><h3>Server virtualization</h3><p>One physical server is divided into multiple virtual servers, each with allocated CPU, memory, storage, and an operating system.</p><div class="mini-tags"><span>Consolidation</span><span>Snapshots</span><span>Flexible capacity</span></div></article>
+        <article class="feature-card"><div class="feature-icon">⌘</div><h3>Network virtualization</h3><p>Logical networks are created independently of physical cabling and devices, using software-defined switches, routers, overlays, and policies.</p><div class="mini-tags"><span>Segmentation</span><span>Automation</span><span>Isolation</span></div></article>
+      </div>
+      <div class="flow-diagram" aria-label="Physical resources are abstracted into logical resources">
+        <div class="flow-box"><b>Physical layer</b><span>Servers · Switches · Storage</span></div><div class="flow-arrow">→</div><div class="flow-box flow-highlight"><b>Virtual layer</b><span>VMs · Virtual networks · Policies</span></div><div class="flow-arrow">→</div><div class="flow-box"><b>Workloads</b><span>Apps · Services · Users</span></div>
+      </div>
+    </section>
+
+    <section id="hypervisors" class="dark-section">
+      <div class="section-wrap">
+        <p class="eyebrow">03 / THE VM LAYER</p><h2>Meet the hypervisor</h2>
+        <p class="dark-lead">A hypervisor creates and runs virtual machines, allocating physical resources to each guest environment.</p>
+        <div class="hypervisor-grid">
+          <article class="hypervisor-card">
+            <span class="type-pill">TYPE 1</span><h3>Bare-metal</h3><p class="runs-on">Runs directly on physical hardware</p>
+            <div class="stack"><span class="stack-app">Applications</span><span class="stack-os">Guest operating systems</span><span class="stack-hyper">Type-1 hypervisor</span><span class="stack-hw">Physical hardware</span></div>
+            <h4>Strengths</h4><p>Common in data centers; generally offers efficient resource control and centralized management.</p>
+            <h4>Considerations</h4><p>May require dedicated infrastructure, compatible hardware, and specialist administration.</p>
+            <p class="example dark-example"><b>Examples:</b> VMware ESXi, Microsoft Hyper-V, Xen.</p>
+          </article>
+          <article class="hypervisor-card">
+            <span class="type-pill type-two">TYPE 2</span><h3>Hosted</h3><p class="runs-on">Runs as an application on a host OS</p>
+            <div class="stack"><span class="stack-app">Applications</span><span class="stack-os">Guest operating systems</span><span class="stack-hyper">Type-2 hypervisor</span><span class="stack-host">Host operating system</span><span class="stack-hw">Physical hardware</span></div>
+            <h4>Strengths</h4><p>Convenient for learning, desktop testing, demonstrations, and running another OS locally.</p>
+            <h4>Considerations</h4><p>Shares the host OS and its resource overhead; less typical for large production server estates.</p>
+            <p class="example dark-example"><b>Examples:</b> Oracle VirtualBox, VMware Workstation.</p>
+          </article>
+        </div>
+        <p class="dark-note">Quick rule: Type 1 sits on the hardware; Type 2 sits on a host operating system.</p>
+      </div>
+    </section>
+
+    <section id="containers" class="section-wrap">
+      <p class="eyebrow dark-eyebrow">04 / LIGHTWEIGHT ISOLATION</p><h2>Containers: a different approach</h2>
+      <p class="lead">Containers package an application with its libraries and configuration. They typically share the host operating-system kernel instead of running a separate guest OS for every container.</p>
+      <div class="compare-table-wrap">
+        <table><thead><tr><th>Feature</th><th>Virtual machine</th><th>Container</th></tr></thead><tbody>
+          <tr><th>Operating system</th><td>Each VM includes a guest OS</td><td>Shares the host kernel</td></tr>
+          <tr><th>Typical footprint</th><td>Usually larger</td><td>Usually smaller</td></tr>
+          <tr><th>Startup</th><td>Often slower</td><td>Often faster</td></tr>
+          <tr><th>Isolation boundary</th><td>Virtual hardware + guest OS</td><td>OS-level isolation mechanisms</td></tr>
+          <tr><th>Common use</th><td>Different OS environments, legacy systems</td><td>Portable application deployment, microservices</td></tr>
+        </tbody></table>
+      </div>
+      <p class="note"><b>Important:</b> Containers are not automatically a replacement for VMs. Many systems run containers inside virtual machines to combine deployment flexibility with infrastructure isolation.</p>
+    </section>
+
+    <section id="cost" class="tinted-section">
+      <div class="section-wrap">
+        <p class="eyebrow dark-eyebrow">05 / PLANNING</p><h2>The cost of virtualization</h2>
+        <p class="section-subtitle">Virtualization can reduce some costs, but it introduces others. Total cost depends on scale, workload, licensing, and operations.</p>
+        <div class="cost-grid">
+          <article class="cost-card savings"><span class="cost-kicker">POTENTIAL SAVINGS</span><h3>What may cost less?</h3><ul><li>Fewer physical servers to purchase</li><li>Lower power and cooling needs</li><li>Better hardware utilization</li><li>Faster provisioning and recovery</li><li>Less data-center space</li></ul></article>
+          <article class="cost-card expenses"><span class="cost-kicker">COSTS TO PLAN FOR</span><h3>What may cost more?</h3><ul><li>Hypervisor and management licenses</li><li>Shared storage and high-speed networking</li><li>Migration and application testing</li><li>Staff training and specialist support</li><li>Backup, monitoring, and security controls</li></ul></article>
+        </div>
+        <div class="formula"><span>Total cost of ownership</span><strong>Hardware + Software + Operations + Migration + Risk</strong><p>Compare costs over the same period and include both upfront and ongoing expenses.</p></div>
+      </div>
+    </section>
+
+    <section class="section-wrap">
+      <p class="eyebrow dark-eyebrow">06 / WRAP-UP</p><h2>Benefits, challenges, and conclusion</h2>
+      <div class="takeaways">
+        <article><span class="takeaway-mark">+</span><div><h3>Benefits</h3><p>Resource consolidation, workload flexibility, faster provisioning, test environments, and improved disaster-recovery options.</p></div></article>
+        <article><span class="takeaway-mark minus">−</span><div><h3>Challenges</h3><p>Management complexity, licensing uncertainty, host failure impact, resource contention, and security misconfiguration.</p></div></article>
+        <article><span class="takeaway-mark check">✓</span><div><h3>Conclusion</h3><p>Virtualization is a core infrastructure technique. The best choice—VMs, containers, network virtualization, or a combination—depends on the workload and its isolation, performance, and cost requirements.</p></div></article>
+      </div>
+    </section>
+
+    <section class="references-section">
+      <div class="section-wrap">
+        <p class="eyebrow">LEARN MORE</p><h2>References</h2>
+        <ul class="reference-list">
+          <li><a href="https://learn.microsoft.com/en-us/windows-server/virtualization/" target="_blank" rel="noreferrer">Microsoft Learn — Windows Server virtualization</a></li>
+          <li><a href="https://www.redhat.com/en/topics/virtualization/what-is-virtualization" target="_blank" rel="noreferrer">Red Hat — What is virtualization?</a></li>
+          <li><a href="https://www.redhat.com/en/topics/containers" target="_blank" rel="noreferrer">Red Hat — Container concepts</a></li>
+          <li><a href="https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/" target="_blank" rel="noreferrer">Docker Docs — What is a container?</a></li>
+          <li><a href="https://www.vmware.com/topics/glossary/content/hypervisor.html" target="_blank" rel="noreferrer">VMware — Hypervisor overview</a></li>
+        </ul>
+        <p class="references-note">Prepared as an educational overview. Product features and licensing terms can change; consult vendor documentation for current details.</p>
+      </div>
+    </section>
+  </main>
+  <footer><a class="brand footer-brand" href="#top"><span class="brand-mark">V</span> Virtualization<span class="brand-light">Lab</span></a><p>Understand the layer. Choose the right tool.</p><a class="back-top" href="#top">Back to top ↑</a></footer>
+  <script src="script.js"></script>
+</body>
+</html>
